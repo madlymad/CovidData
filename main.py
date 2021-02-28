@@ -7,6 +7,7 @@ from config import KEY_VIBER_DB
 from db import create_connection, select_covid
 from writer import writeData
 from data import specialHandler
+from util import resource_path
 
 locale.setlocale(locale.LC_ALL, '')
 
@@ -30,4 +31,6 @@ with conn:
         data.append(values)
 
 #print(data)
-writeData("covid.xlsx", data, header[0], header)
+xlsx = resource_path("covid.xlsx")
+writeData(xlsx, data, header[0], header)
+print("Data saved at {xlsx}")
