@@ -1,4 +1,6 @@
-import sys, os, os.path
+import sys
+import os
+import os.path
 from os import path
 import yaml
 from util import resource_path
@@ -6,13 +8,16 @@ from util import resource_path
 KEY_VIBER_NO = "viberNO"
 KEY_VIBER_DB = "viberDB"
 
+
 def configFilename():
     return resource_path("config.yaml")
 
+
 def viberDbPath(number: str):
     viberPC = os.path.join(os.environ['APPDATA'], "ViberPC")
-    viberDb =  os.path.join(viberPC, number, "viber.db")
+    viberDb = os.path.join(viberPC, number, "viber.db")
     return viberDb
+
 
 def _initConfig():
     config = {}
@@ -21,11 +26,12 @@ def _initConfig():
     message = input()
     if message:
         config[KEY_VIBER_NO] = message
-    
+
     config = configDB(config)
 
     saveConfig(config)
     return config
+
 
 def saveConfig(config):
     with open(configFilename(), 'w') as f:
@@ -44,6 +50,7 @@ def verifyDb(message, config):
     else:
         return False, config
 
+
 def configDB(config):
     while True:
         print(
@@ -56,6 +63,7 @@ def configDB(config):
             print("Please enter a valid path or leave empty to get the default.")
     return config
 
+
 def readConfig():
     config = {}
     if not path.exists(configFilename()):
@@ -63,6 +71,7 @@ def readConfig():
     with open(configFilename(), 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
         return config
+
 
 def hasConfig():
     config = readConfig()
@@ -74,6 +83,7 @@ def hasConfig():
     if exist:
         print(f"Configuration retrieved from {configFilename()}")
     return exist
+
 
 def initConfig():
     configured = hasConfig()

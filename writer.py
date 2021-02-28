@@ -8,6 +8,7 @@ import xlsxwriter
 from pathlib import Path
 from shutil import copyfile
 
+
 def backupFilename(filename):
     extension = "".join(Path(filename).suffixes)
     filename = filename.replace(extension, "")
@@ -32,7 +33,8 @@ def writeData(filename, data: list, identifier: str, columns: list):
 
     # Create a Pandas Excel writer using XlsxWriter as the engine.
     # pylint: disable=abstract-class-instantiated
-    writer = pd.ExcelWriter(filename, engine='xlsxwriter', date_format='dd/mm/YYYY', datetime_format='dd/mm/YYYY')
+    writer = pd.ExcelWriter(filename, engine='xlsxwriter',
+                            date_format='dd/mm/YYYY', datetime_format='dd/mm/YYYY')
     xbook = writer.book
     xbook.strings_to_numbers = True
 
@@ -45,8 +47,9 @@ def writeData(filename, data: list, identifier: str, columns: list):
             tableData.loc[number_of_rows, columns] = data[i]
         else:
             tableData.loc[tableData[identifier] == unique, columns] = data[i]
-    
-    tableData[identifier] = pd.to_datetime(tableData[identifier], format='%d/%m/%Y', infer_datetime_format=True)#.dt.strftime("%d/%m/%Y")
+
+    tableData[identifier] = pd.to_datetime(
+        tableData[identifier], format='%d/%m/%Y', infer_datetime_format=True)  # .dt.strftime("%d/%m/%Y")
     tableData.sort_values(by=[identifier], inplace=True, ascending=False)
 
     tableData.to_excel(excel_writer=writer,

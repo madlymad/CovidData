@@ -11,7 +11,7 @@ def create_connection(db_file):
     try:
         conn = sqlite3.connect(db_file)
 
-    except Error as e:# pylint: disable=undefined-variable
+    except Error as e:  # pylint: disable=undefined-variable
         print(e)
 
     return conn
