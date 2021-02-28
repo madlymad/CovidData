@@ -10,19 +10,34 @@ def create_connection(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-    except Error as e:
+
+    except Error as e:# pylint: disable=undefined-variable
         print(e)
 
     return conn
 
-def select_covid(conn):
+
+def convid_conversation(conn):
+    cur = conn.cursor()
+    sql = """
+        SELECT ChatID
+        FROM ChatInfo
+        WHERE name = "Ελληνική Κυβέρνηση" AND PGTabLine like "%COVID-19%"
+    """
+    cur.execute(sql)
+
+    rows = cur.fetchall()
+    return rows[0][0]
+
+
+def select_covid(conn, chatId):
     """
     """
     cur = conn.cursor()
-    sql = """
-    SELECT Body
-    FROM MessageInfo
-    WHERE ChatID = 2 AND Body like "%Ενημέρωση για τον κορωνοϊό%"
+    sql = f"""
+        SELECT Body
+        FROM MessageInfo
+        WHERE ChatID = {chatId} AND Body like "%Ενημέρωση για τον κορωνοϊό%"
     """
     cur.execute(sql)
 

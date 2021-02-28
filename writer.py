@@ -7,8 +7,6 @@ import pandas as pd
 import xlsxwriter
 from pathlib import Path
 from shutil import copyfile
-print('Running' if __name__ == '__main__' else 'Importing', Path(__file__).resolve())
-
 
 def backupFilename(filename):
     extension = "".join(Path(filename).suffixes)
