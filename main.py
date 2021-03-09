@@ -24,12 +24,12 @@ with conn:
     chatId = convid_conversation(conn)
     entries = select_covid(conn, chatId)
 
-    rData = r" (\d+\/\d+\/\d+|\d+(?:\.\d{3})*|κανένα)+"
+    rData = r"\b(\d+\/\d+\/\d+|\d+(?:\.\d{3})*|κανένα)+"
     for entry in entries:
         # print(entry)
         values = re.findall(rData, entry[0])
-        values = values[:9]
         # print(f"{len(values)}:\t{values}")
+        values = values[:9]
         values = specialHandler(values)
         data.append(values)
 
