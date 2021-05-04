@@ -21,9 +21,13 @@ def specialHandler(data):
     if data[0] == '8/6/2020':
         data.pop(3)  # delete 4
 
+    if data[0] == '02/05/2021':
+        data.pop(0)  # delete 02/05/2021 keep 03/05/2021
+
     # Format dates
     data[0] = dateFormat(data[0])
 
+    data = data[:9]
     # Move tests to proper location when ΜΕΘ is missing
     if len(data) == 7 and int(data[-1]) > 50000:
         data.insert(-1, None)

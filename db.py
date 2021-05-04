@@ -37,7 +37,7 @@ def select_covid(conn, chatId):
     sql = f"""
         SELECT Body
         FROM MessageInfo
-        WHERE ChatID = {chatId} AND Body like "%Ενημέρωση για τον κορωνοϊό%" AND Timestamp > 0
+        WHERE ChatID = {chatId} AND Body like "%covid19-live-analytics%" AND Timestamp > 0
     """
     cur.execute(sql)
 

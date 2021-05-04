@@ -29,7 +29,6 @@ with conn:
         # print(entry)
         values = re.findall(rData, entry[0])
         # print(f"{len(values)}:\t{values}")
-        values = values[:9]
         values = specialHandler(values)
         data.append(values)
 

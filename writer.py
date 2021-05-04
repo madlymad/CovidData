@@ -41,7 +41,7 @@ def writeData(filename, data: list, identifier: str, columns: list):
     for i in range(len(data)):
         unique = data[i][0]
         #unique = unique.strftime("%d/%m/%Y")
-        found = tableData[tableData[identifier] == unique].index.tolist()
+        found = tableData.index[tableData[identifier] == unique]
         if len(found) == 0:
             number_of_rows = len(tableData.index)
             tableData.loc[number_of_rows, columns] = data[i]
